@@ -1,0 +1,170 @@
+﻿\documentclass{article} 
+\usepackage[czech]{babel} 
+\usepackage{xltxtra}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{amsfonts}
+%\usepackage{amssymb}
+\usepackage{csquotes}
+\usepackage{indentfirst}
+%\usepackage[a4paper, margin=3.0cm]{geometry}
+
+\setlength{\parindent}{1.5cm}
+
+\DeclareQuoteAlias{german}{czech}
+\MakeOuterQuote{"}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+
+\begin{enumerate}[1)]
+
+\item Obecně pro $\forall x \in \mathbb{R}$ je $F_{X}(x) = P(X \leq x)$, tedy nutně $0 \leq F_{X}(x) \leq 1$. Zároveň nahlédněme, že je-li $x_{1} < x_{2}$, pak $F_{X}(x_{2}) = P(X \leq x_{2}) = P(X \leq x_{1} \lor X \in \langle x_{1}, x_{2}\rangle) = P(X \leq x_{1}) + P(X \in \langle x_{1}, x_{2}\rangle) = F(x_{1}) + P(X \in \langle x_{1}, x_{2}\rangle)$. To přepišme jako $F_{X}(x_{2}) - F_{X}(x_{2}) = P(X \in \langle x_{1}, x_{2}\rangle) \geq 0$, tedy nutně $F_{X}(x_{2}) - F_{X}(x_{2}) \geq 0$ pro $\forall x_{1}, x_{2} \in \mathbb{R}: x_{1} < x_{2}$. Distribuční funkce náhodné veličiny $X$ je tedy neklesající a svými hodnotami nikdy mimo interval $\langle 0, 1 \rangle$.
+
+\begin{enumerate}[a)]
+  \item V intervalu $( 0, \pi )$ není $F_{X}(x) = \sin x$ distribuční funkcí, neboť na podintervalu $\left\langle 0, \frac{\pi}{2} \right)$ je klesající.
+  \item V intervalu $\left( 0, \frac{\pi}{2} \right)$ může být $F_{X}(x) = \sin x$ distribuční funkcí, neboť je neklesající a není svými hodnotami mimo interval $\langle 0, 1 \rangle$. Současně snadno nahlédneme, že pravděpodobnostní hustotou je pak $f_{X}(x) = \frac{\text{d} F_{X}(x)}{\text{d}x} = \frac{\text{d} \sin x}{\text{d}x} = \cos x$.
+\end{enumerate}
+
+\item Zřejmě je pro náhodnou veličinu $X$ dle zadání $P(0 \leq X \leq 4) = 1$. Proto můžeme psát $P(0 \leq X \leq 4) = F_{X}(4) - F_{X}(0) = 1$ ($\dagger$). Obecně platí $F_{X}(x) = \int_{-\infty}^{x} f_{X}(\tau) \text{d}\tau$.
+
+\begin{enumerate}[a)]
+\item Dosaďme předchozí vztah do rovnosti ($\dagger$). Získáme
+
+\begin{equation*}
+\begin{split}
+  F_{X}(4) - F_{X}(0) &= \int_{-\infty}^{4} f_{X}(\tau) \text{d}\tau - \int_{-\infty}^{0} f_{X}(\tau) \text{d}\tau \\
+  &= \int_{0}^{4} f_{X}(\tau) \text{d}\tau \\
+  &= \int_{0}^{4} \left(\frac{1}{2} - a\tau \right) \text{d}\tau \\
+  &= \left[ \frac{\tau}{2} - \frac{a\tau^{2}}{2} \right]_{0}^{4} \\
+  &= \left( \frac{4}{2} - \frac{a \cdot 4^{2}}{2} \right) - \left( \frac{0}{2} - \frac{a \cdot 0^{2}}{2} \right)\\
+  &= 2 - 8a \\
+  &\stackrel{\text{($\dagger$)}}{=} 1 .
+\end{split}
+\end{equation*}
+
+Teď již snadno nahlédneme, že $a = \frac{1}{8}$.
+
+\item Už víme, že je $F_{X}(x) = \int_{-\infty}^{x} f_{X}(\tau) \text{d}\tau$. Dosaďme do předchozího vztahu za $f_{X}(\tau) = \left(\frac{1}{2} - a\tau \right)$ pro $a = \frac{1}{8}$. Dostaneme
+
+\begin{equation*}
+\begin{split}
+  F_{X}(x) &= \int_{-\infty}^{x} f_{X}(\tau) \text{d}\tau \\
+  &= \int_{-\infty}^{x} \left. \left(\frac{1}{2} - a\tau \right) \text{d}\tau \right\rvert_{\tau \geq 0 \ \wedge \ a = \frac{1}{8}} \\
+  &= \int_{0}^{x} \left(\frac{1}{2} - \frac{\tau}{8} \right) \text{d}\tau \\
+  &= \left[ \frac{\tau}{2} - \frac{\tau^{2}}{16} \right]_{0}^{x} \\
+  &= \left( \frac{x}{2} - \frac{x^{2}}{16} \right) - \left( \frac{0}{2} - \frac{0^{2}}{16} \right)\\
+  &= \frac{8x - x^{2}}{16}, \qquad 0 \leq x \leq 4.
+\end{split}
+\end{equation*}
+
+\item Je $P(1 \leq X \leq 2) = F_{X}(2) - F_{X}(1)$, po dosazení z b) dostaneme $P(1 \leq X \leq 2) = F_{X}(2) - F_{X}(1) = \frac{8 \cdot 2 - 2^{2}}{16} - \frac{8 \cdot 1 - 1^{2}}{16} = \frac{3}{4} - \frac{7}{16} = \frac{5}{16}$.
+
+\end{enumerate}
+
+\item Obecně platí $f_{X}(x) = \frac{\text{d} F_{X}(x)}{\text{d}x}$ a také $\mathbf{E}(X) = \int_{\forall x \in \mathcal{D}_{f_{X}}} x f_{X}(x) \text{d}x$. Nejdříve najděme pravděpodobnostní hustotu $f_{X}(x)$, zřejmě je $f_{X}(x) = \frac{\text{d} F_{X}(x)}{\text{d}x} = \frac{\text{d} \left(1 - \frac{1}{x^{3}} \right)}{\text{d}x} = \frac{3}{x^{4}}$, kde $x > 1$.
+
+Nyní dopočítejme střední hodnotu. Je $\mathbf{E}(X) = \int_{\forall x \in \mathcal{D}_{f_{X}}} x f_{X}(x) \text{d}x = \int_{1}^{\infty} x \cdot \frac{3}{x^{4}} \cdot \text{d}x = \int_{1}^{\infty} \frac{3}{x^{3}} \cdot \text{d}x = \left[ -\frac{3}{2x^2} \right]_{1}^{\infty} = 0 - (- \frac{3}{2}) = \frac{3}{2}$.
+
+Pro medián $\tilde{x}$ platí, že pravděpodobnost toho, že náhodná veličina $X$ nabude hodnoty nanejvýš rovné mediánu, je $\frac{1}{2}$. Je tedy $P(X \leq \tilde{x}) = F_{X}(\tilde{x}) = \frac{1}{2}$. Získáváme rovnost $1 - \frac{1}{\tilde{x}^{3}} = \frac{1}{2}$, jejímž řešením je medián $\tilde{x} = \sqrt[3]{2}$.
+
+\item Z obrázku nahlédneme, že je
+
+\begin{equation*}
+f_{X}(x) = \left\{
+\begin{array}{ll}
+ax, & 0 \leq x \leq 1 \\
+\phantom{a}0, & \text{jinak}.
+\end{array} \right.
+\end{equation*}
+
+\begin{enumerate}[a)]
+
+\item Víme, že musí být $P(X = \{\forall x: x \in \mathcal{D}_{f_{X}}\}) = 1 = \int_{\forall x \in \mathcal{D}_{f_{X}}} f_{X}(x) \text{d}x$. Z toho vyjděme při vyčíslení konstanty $a$; je tedy $P(X = \langle 0, 1 \rangle) = 1 = \int_{0}^{1} f_{X}(x) \text{d}x = \int_{0}^{1} ax \text{d}x = \left[ \frac{ax^{2}}{2} \right]_{0}^{1} = \frac{a \cdot 1^{2}}{2} - \frac{a \cdot 0^{2}}{2} = \frac{1}{2}a$. Takže $a = 2$. Teď už jen přepišme vztah pro pravděpodobnostní hustotu $f_{X}(x)$
+
+\begin{equation*}
+f_{X}(x) = \left\{
+\begin{array}{ll}
+2x, & 0 \leq x \leq 1 \\
+\phantom{2}0, & \text{jinak}.
+\end{array} \right.
+\end{equation*}
+
+\item Obecně je $F_{X}(x) = \left. \int_{-\infty}^{x} f_{X}(\tau) \text{d}\tau \right\rvert_{\tau \in \mathcal{D}_{f_{X}}}$. Dosaďme za $f_{X}(\tau) = 2x$ \mbox{a řešme} $F_{X}(x) = \left. \int_{-\infty}^{x} f_{X}(\tau) \text{d}\tau \right\rvert_{\tau \in \mathcal{D}_{f_{X}}} = \int_{0}^{x} 2\tau \text{d}\tau = \left[ \tau^{2} \right]_{0}^{x} = x^{2} - 0^{2} = x^{2}$, kde $0 \leq x \leq 1$. Pro distribuční funkci tedy platí
+
+\begin{equation*}
+F_{X}(x) = \left\{
+\begin{array}{ll}
+\phantom{^{2}}0, & x < 0 \\
+x^{2}, & 0 \leq x \leq 1 \\
+\phantom{^{2}}1, & x > 1 .\\
+\end{array} \right.
+\end{equation*}
+
+\item Je $P\left(\frac{1}{3} \leq X \leq \frac{2}{3} \right) = F_{X}\left(\frac{2}{3} \right) - F_{X}\left(\frac{1}{3} \right)$, po dosazení z b) dostaneme $P\left(\frac{1}{3} \leq X \leq \frac{2}{3} \right) = F_{X}\left(\frac{2}{3} \right) - F_{X}\left(\frac{1}{3} \right) = \left(\frac{2}{3}\right)^{2} - \left(\frac{1}{3}\right)^{2} = \frac{1}{3}$.
+
+\end{enumerate}
+
+\item Víme, že musí být $P(X = \{\forall x: x \in \mathcal{D}_{f_{X}}\}) = 1 = \int_{\forall x \in \mathcal{D}_{f_{X}}} f_{X}(x) \text{d}x$. Z toho vyjděme při vyčíslování \mbox{konstant $c$}.
+
+\begin{enumerate}[a)]
+
+\item Je $P(X = \{\forall x: x \in \mathcal{D}_{f_{X}}\}) = 1 = \int_{\forall x \in \mathcal{D}_{f_{X}}} f_{X}(x) \text{d}x = \int_{0}^{\pi} c \cdot \sin x \cdot \text{d}x = \left[ -c \cdot \cos x \right]_{0}^{\pi} = c - (-c) = 2c$. Takže $c = \frac{1}{2}$.
+
+\item Je $P(X = \{\forall x: x \in \mathcal{D}_{f_{X}}\}) = 1 = \int_{\forall x \in \mathcal{D}_{f_{X}}} f_{X}(x) \text{d}x = \int_{0}^{2} c x^{2} \text{d}x = \left[ \frac{cx^{3}}{3} \right]_{0}^{2} = \frac{8}{3}c - 0 = \frac{8}{3}c$. Takže $c = \frac{3}{8}$.
+
+\end{enumerate}
+
+\item Ze zadání pro distribuční funkci $F_{X}(x)$ vyplývá, že
+
+\begin{equation*}
+F_{X}(x) = \left\{
+\begin{array}{ll}
+\phantom{ \ \ \ \ }0, & x < -5 \\
+\frac{x + 5}{7}, & -5 \leq x \leq 2 \\
+\phantom{ \ \ \ \ }1, & x > 2 .\\
+\end{array} \right.
+\end{equation*}
+
+\begin{enumerate}[a)]
+
+\item Platí $f_{X}(x) = \frac{\text{d} F_{X}(x)}{\text{d}x}$, tedy $f_{X}(x) = \frac{\text{d} \left(\frac{x + 5}{7}\right)}{\text{d}x} = \frac{1}{7}$ pro všechna $-5 \leq x \leq 2$. Pišme tedy pro pravděpodobnostní hustotu $f_{X}(x)$
+
+\begin{equation*}
+f_{X}(x) = \left\{
+\begin{array}{ll}
+\frac{1}{7}, & -5 \leq x \leq 2 \\
+\phantom{ \ }0, & \text{jinak}.
+\end{array} \right.
+\end{equation*}
+
+\item Je $P(-2 < X < 2) = F_{X}(2) - F_{X}(-2)$, po dosazení ze zadání dostaneme $P(-2 < X < 2) = F_{X}(2) - F_{X}(-2) = \frac{2 + 5}{7} - \frac{-2 + 5}{7} = 1 - \frac{3}{7} = \frac{4}{7}$.
+
+\item Je $P(X = 2) = P(2 \leq X \leq 2) = F_{X}(2) - F_{X}(2)$, po dosazení ze zadání dostaneme $P(2 \leq X \leq 2) = F_{X}(2) - F_{X}(2) = \frac{2 + 5}{7} - \frac{2 + 5}{7} = 1 - 1 = 0$. To jsme mohli nahlédnou \mbox{i apriorně}, neboť pravděpodobnost, že spojitá veličina nabude právě jedné bodové hodnoty na spojitém intervalu hodnot, je již z geometrické definice pravděpodobnosti nulová.
+
+\item Je $P(-6 < X < 1) = P(-6 < X < -5) + P(-5 \leq X < 1) = 0 + (F_{X}(1) - F_{X}(-5))$, po dosazení ze zadání dostaneme $P(-6 < X < 1) = F_{X}(1) - F_{X}(-5) = \frac{1 + 5}{7} - \frac{-5 + 5}{7} = \frac{6}{7} - 0 = \frac{6}{7}$.
+
+\end{enumerate}
+
+\item Ze zadání víme, že pro pravděpodobnostní hustotu $f_{X}(x)$ platí
+
+\begin{equation*}
+f_{X}(x) = \left\{
+\begin{array}{ll}
+12x^{2}(1 - x), & 0 \leq x \leq 1 \\
+\phantom{12x^{2}(1 \ \ \ \ )}0, & \text{jinak}.
+\end{array} \right.
+\end{equation*}
+
+Víme, že obecně platí $\mathbf{E}(X) = \int_{\forall x \in \mathcal{D}_{f_{X}}} x f_{X}(x) \text{d}x$. Dosaďme do předchozího vztahu pravděpodobnostní hustotu $f_{X}(x)$ ze zadání, získáváme $\mathbf{E}(X) = \int_{\forall x \in \mathcal{D}_{f_{X}}} x f_{X}(x) \text{d}x = \int_{0}^{1} x \cdot 12x^{2}(1 - x) \cdot \text{d}x = \int_{0}^{1} (12x^{3} - 12x^{4}) \text{d}x = \left[ 3x^{4} - \frac{12}{5}x^{5} \right]_{0}^{1} = (3 \cdot 1^{4} - \frac{12}{5} \cdot 1^{5}) - 0 = \frac{3}{5}$. Je tedy $\mathbf{E}(X) =  \frac{3}{5}$.
+
+Pro výpočet rozptylu použijeme tzv. výpočtový tvar, tedy $\mathrm{var}(X) = \mathbf{E}(X^{2}) - (\mathbf{E}(X))^{2}$. Zřejmě musíme nejdříve spočítat $\mathbf{E}(X^{2})$. To provedeme podle obecného vztahu pro $\mathbf{E}(X^{2})$, kdy je $\mathbf{E}(X^{2}) = \int_{\forall x \in \mathcal{D}_{f_{X}}} x^{2} f_{X}(x) \text{d}x$. Dosaďme tedy $\mathbf{E}(X^{2}) = \int_{0}^{1} x^{2} \cdot 12x^{2}(1 - x) \cdot \text{d}x = \int_{0}^{1} (12x^{4} - 12x^{5}) \text{d}x = \left[ \frac{12}{5}x^{5} - 2x^{6} \right]_{0}^{1} = (\frac{12}{5} \cdot 1^{5} - 2 \cdot 1^{6}) - 0 = \frac{2}{5}$. Teď již vyčísleme rozptyl $\mathrm{var}(X) = \mathbf{E}(X^{2}) - (\mathbf{E}(X))^{2} = \frac{2}{5} - \left( \frac{3}{5} \right)^{2} = \frac{2}{5} - \frac{9}{25} = \frac{1}{25}$. Je tedy $\mathrm{var}(X) = \frac{1}{25}$.
+
+Modus $x^{*}$ je nejvíce pravděpodobnou hodnotou náhodné veličiny $X$. Musí tedy být $x^{*} = \argmax\limits_{0 \leq x \leq 1} \left\{ \lim_{\Delta \to 0} P\left(x - \frac{\Delta}{2} \leq X \leq x + \frac{\Delta}{2}\right) \right\} \approx \argmax\limits_{0 \leq x \leq 1} \left\{ f_{X}(x) \cdot \Delta \right\}$. Zafixujme $\Delta > 0$ na velmi "malou" hodnotu, pak $x^{*} \approx \argmax\limits_{0 \leq x \leq 1} \left\{ f_{X}(x) \right\}$. Využijme spojitosti $f_{X}(x)$ na intervalu $0 \leq x \leq 1$, najděme první derivaci $f_{X}(x)$ podle $x$ a položme ji rovnou nule a hledejme extrém, pak ověřme, že jde o maximum. Tedy $\frac{\text{d}f_{X}(x)}{\text{d}x} = \frac{\text{d}(12x^{2}(1 - x))}{\text{d}x} = \frac{\text{d}(12x^{2} - 12x^{3}))}{\text{d}x} = 24x - 36x^{2} \equiv 0$, odtud je $x^{*} \equiv x \in \left\{ 0, \frac{2}{3} \right\}$. Pro druhou derivaci platí $\frac{\text{d}^{2} f_{X}(x)}{\text{d}x^{2}} = \frac{\text{d}(24x - 36x^{2})}{\text{d}x} = 24 - 72x$, tedy pouze pro $x = \frac{2}{3}$ je $24 - 72x < 0$ a jde v tomto bodě skutečně o maximum. Modem $x^{*}$ náhodné veličiny $X$ je tedy hodnota $x^{*} = \frac{2}{3}$.
+
+
+\end{enumerate}
+
+
+\end{document}
