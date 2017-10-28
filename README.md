@@ -1,0 +1,1 @@
+# vybrane_ulohy_jednorozmerna_nahodna_velicina
